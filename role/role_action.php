@@ -1,23 +1,23 @@
 <?php
 
-include '../connection.php';
+include '../koneksi.php';
 
 
 if (isset($_GET['aksi'])) {
     $aksi = $_GET['aksi'];
     if ($aksi == 'insert') {
         $nama = $_POST['nama_role'];
-        insertRole($conn, $nama);
+        insertRole($con, $nama);
     } else if ($aksi == 'edit') {
         $id = $_GET['id'];
-        $data = showDataEditRole($conn, $id)->fetch_assoc();
+        $data = showDataEditRole($con, $id)->fetch_assoc();
     } else if ($aksi == 'update') {
         $id = $_POST['id'];
         $nama = $_POST['nama_role'];
-        updateRole($conn, $id, $nama);
+        updateRole($con, $id, $nama);
     } else if ($aksi == 'delete') {
         $id = $_GET['id'];
-        deleteRole($conn, $id);
+        deleteRole($con, $id);
     }
 }
 
@@ -30,7 +30,7 @@ function readRole($con)
 
 function insertRole($con, $nama)
 {
-    $query = "insert into role (name) values ('$nama')";
+    $query = "insert into role (nama) values ('$nama')";
     $result = $con->execute_query($query);
 
     if ($result) {
@@ -49,7 +49,7 @@ function showDataEditRole($con, $id)
 
 function updateRole($con, $id, $nama)
 {
-    $query = "update role set name = '$nama' where id = $id";
+    $query = "update role set nama = '$nama' where id = $id";
     $result = $con->execute_query($query);
 
     if ($result) {
